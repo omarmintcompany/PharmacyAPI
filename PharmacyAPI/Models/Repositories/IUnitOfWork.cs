@@ -1,4 +1,5 @@
-﻿namespace PharmacyAPI.Models.Repositories
+﻿
+namespace PharmacyAPI.Models.Repositories
 {
     public interface IUnitOfWork
     {

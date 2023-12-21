@@ -1,9 +1,12 @@
-﻿using PharmacyAPI.Resources;
+﻿using PharmacyAPI.Persistence;
+using PharmacyAPI.Resources;
 
 namespace PharmacyAPI.Models.Responses
 {
     public class PharmacyResponse : BaseResponse<PharmacyResource>
     {
+        private Pharmacys newPharmacy;
+
         public PharmacyResponse(PharmacyResource data) : base(data) { }
 
         /// <summary>
@@ -12,6 +15,6 @@ namespace PharmacyAPI.Models.Responses
         /// <param name="message">Error message.</param>
         /// <returns>Response.</returns>
         public PharmacyResponse(string message) : base(message) { }
-       
+
     }
 }

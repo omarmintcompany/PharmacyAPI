@@ -5,9 +5,8 @@ namespace PharmacyAPI.Models.Services
 {
     public interface IPharmacyService
     {
-        Task<PharmacyResponse> CreatePharmacy(PharmacyResource pharmacyData);
-        /* Task<PharmacyResponse> DeletePharmacy(int pharmacyId);
-         Task<PharmacyResource> UpdatePharmacy(PharmacyResource pharmacyData);
-         Task<PharmacyResource> GetNearestPharmacy(int latitude, int longitude);*/
+      //  Task<PharmacyResponse> GetPharmacy(int pharmacyId);
+        Task<PharmacyResponse> CreatePharmacy(PharmacyResource pharmacyData);                 
+        //Task<PharmacyResource> GetNearestPharmacy(int latitude, int longitude);
     }
 }

@@ -1,4 +1,8 @@
+using PharmacyAPI.Models.Repositories;
+using PharmacyAPI.Models.Services;
 using PharmacyAPI.Persistence;
+using PharmacyAPI.Repositories;
+using PharmacyAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,11 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddDbContext<PharmacyContext>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPharmacyRepository, PharmacyRepository>();
+builder.Services.AddScoped<IPharmacyService, PharmacyService>();
+
+
 
 var app = builder.Build();
 

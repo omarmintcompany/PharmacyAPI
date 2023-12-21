@@ -1,0 +1,38 @@
+version: '3.4'
+
+services:
+  pharmacyapi:
+    image: ${DOCKER_REGISTRY-}pharmacyapi
+    build:
+     context: .
+     dockerfile: PharmacyAPI/Dockerfile
+    logging:
+         driver: "json-file"
+         options:
+            max-file: "5"
+            max-size: 100m
+    ports:
+    - 5001:80
+    - 7001:443 
+    environment:   
+      ASPNETCORE_URLS: "https://+:443;http://+:80"
+      ASPNETCORE_ENVIRONMENT: "production"  
+    networks:
+      - my_network
+    depends_on:
+      - sql_server
+
+  sql_server:
+    image: mcr.microsoft.com/mssql/server
+    container_name: sql_server_container
+    environment:
+      SA_PASSWORD: Temporal1
+      ACCEPT_EULA: Y
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+    networks:
+      - my_network      
+
+networks:
+  my_network:
