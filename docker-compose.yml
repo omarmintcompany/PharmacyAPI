@@ -34,5 +34,14 @@ services:
     networks:
       - my_network      
 
+  ejecutar_script:
+    image: mcr.microsoft.com/mssql-tools
+    depends_on:
+      - sql_server
+    command: /bin/bash -c "sleep 10 && /opt/mssql-tools/bin/sqlcmd -S sql_server -U sa -P Temporal1 -d master -i /scripts/create-database.sql"
+    volumes:
+      - ./sql-scripts:/scripts
+    networks:
+      - my_network
 networks:
   my_network:
