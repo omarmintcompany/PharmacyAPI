@@ -2,6 +2,12 @@
 
 Este proyecto es una API desarrollada en .NET Core que proporciona funciones para gestionar información sobre farmacias. Incluye la consulta de farmacias, la creación de nuevas farmacias y la búsqueda de la farmacia más cercana en base a la geolocalización del cliente.
 
+## Herramientas y Estándares de Estilo
+
+Este proyecto sigue las mejores prácticas y utiliza las siguientes herramientas y estándares de estilo:
+
+- **StyleCop**: Se ha utilizado StyleCop para mantener consistencia en el estilo del código. Asegúrate de revisar las reglas de estilo aplicadas al código fuente.
+
 ## Características
 
 - Consulta de farmacias existentes.
@@ -20,7 +26,7 @@ Este proyecto es una API desarrollada en .NET Core que proporciona funciones par
 1. Clona el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/tu-proyecto.git
+   git clone https://github.com/omarmintcompany/PharmacyAPI.git
 
 2. Accede al directorio del proyecto
    
