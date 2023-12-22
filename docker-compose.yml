@@ -16,7 +16,7 @@ services:
     - 7001:443 
     environment:   
       ASPNETCORE_URLS: "https://+:443;http://+:80"
-      ASPNETCORE_ENVIRONMENT: "production"  
+      ASPNETCORE_ENVIRONMENT: "Development"  
     networks:
       - my_network
     depends_on:
