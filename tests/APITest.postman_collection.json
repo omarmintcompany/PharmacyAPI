@@ -14,8 +14,20 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
-							"    console.log(\"Running Status code is 200 test 1\");\r",
+							"    console.log(\"Running Status code is 200 - GetNearestPharmacy\");\r",
 							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Analizar el cuerpo de la respuesta JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Verificar propiedades específicas del JSON\r",
+							"pm.test(\"Verify name is Farmacia Alicia y Carlos Rios Artiles 1\", function () {\r",
+							"    pm.expect(jsonData.name).to.equal(\"Farmacia Alicia y Carlos Rios Artiles 1\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify pharmacy id\", function () {\r",
+							"    pm.expect(jsonData.id).to.equal(3);\r",
 							"});\r",
 							""
 						],
@@ -27,7 +39,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{BaseUrl}}/api/farmacia?latitude=15&longitude=10",
+					"raw": "{{BaseUrl}}/api/farmacia?latitude=27.212&longitude=15.121",
 					"host": [
 						"{{BaseUrl}}"
 					],
@@ -38,11 +50,11 @@
 					"query": [
 						{
 							"key": "latitude",
-							"value": "15"
+							"value": "27.212"
 						},
 						{
 							"key": "longitude",
-							"value": "10"
+							"value": "15.121"
 						}
 					]
 				}
@@ -50,19 +62,120 @@
 			"response": []
 		},
 		{
-			"name": "AddNewPharmacyCorrect",
+			"name": "GetPharmacysError",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    console.log(\"Running Status code is 400 GetPharmacysError\");\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"// Obtener el cuerpo de la respuesta como texto\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Verificar que la cadena de texto es la esperada\r",
+							"pm.test(\"Verify response body is message error'\", function () {\r",
+							"    pm.expect(responseBody).to.equal(\"Farmacia inexistente\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/farmacia/ver/10",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"farmacia",
+						"ver",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetPharmacysOk",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
-							"    console.log(\"Running Status code is 200 test 2\");\r",
+							"    console.log(\"Running Status code is 200 - GetPharmacysOk\");\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Successful POST request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"// Analizar el cuerpo de la respuesta JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Verificar propiedades específicas del JSON\r",
+							"pm.test(\"Verify name is Farmacia Alicia y Carlos Rios Artiles 1\", function () {\r",
+							"    pm.expect(jsonData.name).to.equal(\"Farmacia Alicia y Carlos Rios Artiles 1\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify pharmacy id\", function () {\r",
+							"    pm.expect(jsonData.id).to.equal(3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify pharmacy latitue\", function () {\r",
+							"    pm.expect(jsonData.latitude).to.equal(28.137670876923);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Verify pharmacy latitue\", function () {\r",
+							"    pm.expect(jsonData.longitude).to.equal(-15.42966616);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/farmacia/ver/3",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"farmacia",
+						"ver",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddPharmacyOk",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    console.log(\"Running Status code is 200 - AddPharmacyOk\");\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// Analizar el cuerpo de la respuesta JSON\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// Verificar propiedades específicas del JSON\r",
+							"pm.test(\"Verify name is Farmacia Nueva para test unitario\", function () {\r",
+							"    pm.expect(jsonData.name).to.equal(\"Farmacia Nueva para test unitario\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -74,7 +187,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia Nueva para test unitario\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,19 +209,23 @@
 			"response": []
 		},
 		{
-			"name": "AddNewPharmacyError",
+			"name": "AdPharmacyError",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    console.log(\"Running Status code is 200 test 3\");\r",
-							"    pm.response.to.have.status(200);\r",
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    console.log(\"Running Status code is 400 - AddPharmacyOk\");\r",
+							"    pm.response.to.have.status(400);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Successful POST request\", function () {\r",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"// Obtener el cuerpo de la respuesta como texto\r",
+							"var responseBody = pm.response.text();\r",
+							"\r",
+							"// Verificar que la cadena de texto es la esperada\r",
+							"pm.test(\"Verify response body is message error'\", function () {\r",
+							"    pm.expect(responseBody).to.equal(\"No se ha podido dar de alta la farmacia : No se puede dar de alta una farmacia sin el nombre.\");\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -120,7 +237,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -1,47 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="APITest" tests="3" time="15.358">
-  <testsuite name="GetNearestPharmacy" id="d677bea6-ffd2-4e4d-91c6-6db36e6bdd70" timestamp="2023-12-22T21:57:11.103Z" tests="1" failures="0" errors="0" time="15.028">
-    <testcase name="Status code is 200" time="15.028" classname="ApiTest"/>
+<testsuites name="APITest" tests="5" time="13.212">
+  <testsuite name="GetNearestPharmacy" id="4be573fe-c608-474e-ba25-0379ac04c34d" timestamp="2023-12-22T23:23:15.734Z" tests="3" failures="0" errors="0" time="12.815">
+    <testcase name="Status code is 200" time="12.815" classname="ApiTest"/>
+    <testcase name="Verify name is Farmacia Alicia y Carlos Rios Artiles 1" time="12.815" classname="ApiTest"/>
+    <testcase name="Verify pharmacy id" time="12.815" classname="ApiTest"/>
   </testsuite>
-  <testsuite name="AddNewPharmacyCorrect" id="1a89d837-1cee-4eae-bcb2-0b778f74aec0" timestamp="2023-12-22T21:57:11.103Z" tests="2" failures="1" errors="0" time="0.280">
-    <testcase name="Status code is 200" time="0.280" classname="ApiTest"/>
-    <testcase name="Successful POST request" time="0.280" classname="ApiTest">
-      <failure type="AssertionFailure" message="expected 200 to be one of [ 201, 202 ]">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: d158146c-b12b-4035-9fee-38c9899a0abe.]]>
-        <![CDATA[Collection name: APITest.]]>
-        <![CDATA[Request name: AddNewPharmacyCorrect.]]>
-        <![CDATA[Test description: Successful POST request.]]>
-        <![CDATA[Error message: expected 200 to be one of [ 201, 202 ].]]>
-        <![CDATA[Stacktrace: AssertionError: expected 200 to be one of [ 201, 202 ]
-   at Object.eval sandbox-script.js:2:2).]]>
-      </failure>
-    </testcase>
+  <testsuite name="GetPharmacysError" id="ebc81886-07f1-4331-a64a-825cf58a9741" timestamp="2023-12-22T23:23:15.734Z" tests="2" failures="0" errors="0" time="0.162">
+    <testcase name="Status code is 400" time="0.162" classname="ApiTest"/>
+    <testcase name="Verify response body is message error'" time="0.162" classname="ApiTest"/>
   </testsuite>
-  <testsuite name="AddNewPharmacyError" id="ba049607-abea-49de-aa47-904df1966c53" timestamp="2023-12-22T21:57:11.103Z" tests="2" failures="2" errors="0" time="0.050">
-    <testcase name="Status code is 200" time="0.050" classname="ApiTest">
-      <failure type="AssertionFailure" message="expected response to have status code 200 but got 400">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: d158146c-b12b-4035-9fee-38c9899a0abe.]]>
-        <![CDATA[Collection name: APITest.]]>
-        <![CDATA[Request name: AddNewPharmacyError.]]>
-        <![CDATA[Test description: Status code is 200.]]>
-        <![CDATA[Error message: expected response to have status code 200 but got 400.]]>
-        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 400
-   at Object.eval sandbox-script.js:1:3).]]>
-      </failure>
-    </testcase>
-    <testcase name="Successful POST request" time="0.050" classname="ApiTest">
-      <failure type="AssertionFailure" message="expected 400 to be one of [ 201, 202 ]">
-        <![CDATA[Failed 1 times.]]>
-        <![CDATA[Collection JSON ID: d158146c-b12b-4035-9fee-38c9899a0abe.]]>
-        <![CDATA[Collection name: APITest.]]>
-        <![CDATA[Request name: AddNewPharmacyError.]]>
-        <![CDATA[Test description: Successful POST request.]]>
-        <![CDATA[Error message: expected 400 to be one of [ 201, 202 ].]]>
-        <![CDATA[Stacktrace: AssertionError: expected 400 to be one of [ 201, 202 ]
-   at Object.eval sandbox-script.js:2:3).]]>
-      </failure>
-    </testcase>
+  <testsuite name="GetPharmacysOk" id="b8ee2af5-8b27-4acd-a67f-ac800da1a8cd" timestamp="2023-12-22T23:23:15.734Z" tests="5" failures="0" errors="0" time="0.049">
+    <testcase name="Status code is 200" time="0.049" classname="ApiTest"/>
+    <testcase name="Verify name is Farmacia Alicia y Carlos Rios Artiles 1" time="0.049" classname="ApiTest"/>
+    <testcase name="Verify pharmacy id" time="0.049" classname="ApiTest"/>
+    <testcase name="Verify pharmacy latitue" time="0.049" classname="ApiTest"/>
+  </testsuite>
+  <testsuite name="AddPharmacyOk" id="a77aadde-ba3d-4f07-9690-2b3c82a1c38a" timestamp="2023-12-22T23:23:15.734Z" tests="2" failures="0" errors="0" time="0.162">
+    <testcase name="Status code is 200" time="0.162" classname="ApiTest"/>
+    <testcase name="Verify name is Farmacia Nueva para test unitario" time="0.162" classname="ApiTest"/>
+  </testsuite>
+  <testsuite name="AdPharmacyError" id="dcf74f2d-ca80-48c4-b6c6-32b48019fd13" timestamp="2023-12-22T23:23:15.734Z" tests="2" failures="0" errors="0" time="0.024">
+    <testcase name="Status code is 400" time="0.024" classname="ApiTest"/>
+    <testcase name="Verify response body is message error'" time="0.024" classname="ApiTest"/>
   </testsuite>
 </testsuites>

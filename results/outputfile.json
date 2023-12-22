@@ -6,7 +6,7 @@
     },
     "item": [
       {
-        "id": "d677bea6-ffd2-4e4d-91c6-6db36e6bdd70",
+        "id": "4be573fe-c608-474e-ba25-0379ac04c34d",
         "name": "GetNearestPharmacy",
         "request": {
           "url": {
@@ -20,11 +20,11 @@
             "query": [
               {
                 "key": "latitude",
-                "value": "15"
+                "value": "27.212"
               },
               {
                 "key": "longitude",
-                "value": "10"
+                "value": "15.121"
               }
             ],
             "variable": []
@@ -36,23 +36,138 @@
           {
             "listen": "test",
             "script": {
-              "id": "1f62d1b0-97b9-40eb-a7cf-110f107fa1db",
+              "id": "46efc4c9-3bb4-4dbf-8a9f-6921c0c29c04",
               "type": "text/javascript",
               "exec": [
                 "pm.test(\"Status code is 200\", function () {\r",
-                "    console.log(\"Running Status code is 200 test 1\");\r",
+                "    console.log(\"Running Status code is 200 - GetNearestPharmacy\");\r",
                 "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "\r",
+                "// Analizar el cuerpo de la respuesta JSON\r",
+                "var jsonData = pm.response.json();\r",
+                "\r",
+                "// Verificar propiedades específicas del JSON\r",
+                "pm.test(\"Verify name is Farmacia Alicia y Carlos Rios Artiles 1\", function () {\r",
+                "    pm.expect(jsonData.name).to.equal(\"Farmacia Alicia y Carlos Rios Artiles 1\");\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Verify pharmacy id\", function () {\r",
+                "    pm.expect(jsonData.id).to.equal(3);\r",
                 "});\r",
                 ""
               ],
-              "_lastExecutionId": "7592457f-a12b-4d13-bf12-9725eb6a2407"
+              "_lastExecutionId": "ddccc6f0-a70d-40b4-9fca-9c7cd5f5453c"
             }
           }
         ]
       },
       {
-        "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
-        "name": "AddNewPharmacyCorrect",
+        "id": "ebc81886-07f1-4331-a64a-825cf58a9741",
+        "name": "GetPharmacysError",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "farmacia",
+              "ver",
+              "10"
+            ],
+            "host": [
+              "{{BaseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "4c451b00-1fc7-445b-aae7-dbe43269840d",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status code is 400\", function () {\r",
+                "    console.log(\"Running Status code is 400 GetPharmacysError\");\r",
+                "    pm.response.to.have.status(400);\r",
+                "});\r",
+                "\r",
+                "// Obtener el cuerpo de la respuesta como texto\r",
+                "var responseBody = pm.response.text();\r",
+                "\r",
+                "// Verificar que la cadena de texto es la esperada\r",
+                "pm.test(\"Verify response body is message error'\", function () {\r",
+                "    pm.expect(responseBody).to.equal(\"Farmacia inexistente\");\r",
+                "});"
+              ],
+              "_lastExecutionId": "58b17306-5719-4d72-ae7a-e26dc4c7d4c3"
+            }
+          }
+        ]
+      },
+      {
+        "id": "b8ee2af5-8b27-4acd-a67f-ac800da1a8cd",
+        "name": "GetPharmacysOk",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "farmacia",
+              "ver",
+              "3"
+            ],
+            "host": [
+              "{{BaseUrl}}"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "e8f15a84-eb3d-4f5f-b4ca-3db1e33efedc",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    console.log(\"Running Status code is 200 - GetPharmacysOk\");\r",
+                "    pm.response.to.have.status(200);\r",
+                "});\r",
+                "\r",
+                "// Analizar el cuerpo de la respuesta JSON\r",
+                "var jsonData = pm.response.json();\r",
+                "\r",
+                "// Verificar propiedades específicas del JSON\r",
+                "pm.test(\"Verify name is Farmacia Alicia y Carlos Rios Artiles 1\", function () {\r",
+                "    pm.expect(jsonData.name).to.equal(\"Farmacia Alicia y Carlos Rios Artiles 1\");\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Verify pharmacy id\", function () {\r",
+                "    pm.expect(jsonData.id).to.equal(3);\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Verify pharmacy latitue\", function () {\r",
+                "    pm.expect(jsonData.latitude).to.equal(28.137670876923);\r",
+                "});\r",
+                "\r",
+                "pm.test(\"Verify pharmacy latitue\", function () {\r",
+                "    pm.expect(jsonData.longitude).to.equal(-15.42966616);\r",
+                "});\r",
+                ""
+              ],
+              "_lastExecutionId": "8c88f235-d740-44a2-9778-fff0858bb6a5"
+            }
+          }
+        ]
+      },
+      {
+        "id": "a77aadde-ba3d-4f07-9690-2b3c82a1c38a",
+        "name": "AddPharmacyOk",
         "request": {
           "url": {
             "path": [
@@ -69,7 +184,7 @@
           "method": "POST",
           "body": {
             "mode": "raw",
-            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia Nueva para test unitario\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -82,26 +197,30 @@
           {
             "listen": "test",
             "script": {
-              "id": "07143924-0871-46ed-b826-563f42cc2079",
+              "id": "dc0b8496-8002-4cda-a331-b8b1990e4721",
               "type": "text/javascript",
               "exec": [
                 "pm.test(\"Status code is 200\", function () {\r",
-                "    console.log(\"Running Status code is 200 test 2\");\r",
+                "    console.log(\"Running Status code is 200 - AddPharmacyOk\");\r",
                 "    pm.response.to.have.status(200);\r",
                 "});\r",
                 "\r",
-                "pm.test(\"Successful POST request\", function () {\r",
-                "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+                "// Analizar el cuerpo de la respuesta JSON\r",
+                "var jsonData = pm.response.json();\r",
+                "\r",
+                "// Verificar propiedades específicas del JSON\r",
+                "pm.test(\"Verify name is Farmacia Nueva para test unitario\", function () {\r",
+                "    pm.expect(jsonData.name).to.equal(\"Farmacia Nueva para test unitario\");\r",
                 "});"
               ],
-              "_lastExecutionId": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
+              "_lastExecutionId": "ef5648e7-a343-423f-ac52-bdf8fdc0bc6c"
             }
           }
         ]
       },
       {
-        "id": "ba049607-abea-49de-aa47-904df1966c53",
-        "name": "AddNewPharmacyError",
+        "id": "dcf74f2d-ca80-48c4-b6c6-32b48019fd13",
+        "name": "AdPharmacyError",
         "request": {
           "url": {
             "path": [
@@ -118,7 +237,7 @@
           "method": "POST",
           "body": {
             "mode": "raw",
-            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -131,19 +250,23 @@
           {
             "listen": "test",
             "script": {
-              "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
+              "id": "c37155bd-efc0-476e-889b-3ab823b24d59",
               "type": "text/javascript",
               "exec": [
-                "pm.test(\"Status code is 200\", function () {\r",
-                "    console.log(\"Running Status code is 200 test 3\");\r",
-                "    pm.response.to.have.status(200);\r",
+                "pm.test(\"Status code is 400\", function () {\r",
+                "    console.log(\"Running Status code is 400 - AddPharmacyOk\");\r",
+                "    pm.response.to.have.status(400);\r",
                 "});\r",
                 "\r",
-                "pm.test(\"Successful POST request\", function () {\r",
-                "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+                "// Obtener el cuerpo de la respuesta como texto\r",
+                "var responseBody = pm.response.text();\r",
+                "\r",
+                "// Verificar que la cadena de texto es la esperada\r",
+                "pm.test(\"Verify response body is message error'\", function () {\r",
+                "    pm.expect(responseBody).to.equal(\"No se ha podido dar de alta la farmacia : No se puede dar de alta una farmacia sin el nombre.\");\r",
                 "});"
               ],
-              "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
+              "_lastExecutionId": "d2da9460-254e-4839-85ae-4576cacfd6b1"
             }
           }
         ]
@@ -174,7 +297,7 @@
     ]
   },
   "globals": {
-    "id": "65be1a46-db81-4da5-82ae-6b164a3a1fa5",
+    "id": "be1eff28-a903-4505-a3ac-a71af4244dfe",
     "values": []
   },
   "run": {
@@ -185,37 +308,37 @@
         "failed": 0
       },
       "items": {
-        "total": 3,
+        "total": 5,
         "pending": 0,
         "failed": 0
       },
       "scripts": {
-        "total": 3,
+        "total": 5,
         "pending": 0,
         "failed": 0
       },
       "prerequests": {
-        "total": 3,
+        "total": 5,
         "pending": 0,
         "failed": 0
       },
       "requests": {
-        "total": 3,
+        "total": 5,
         "pending": 0,
         "failed": 0
       },
       "tests": {
-        "total": 3,
+        "total": 5,
         "pending": 0,
         "failed": 0
       },
       "assertions": {
-        "total": 5,
+        "total": 14,
         "pending": 0,
-        "failed": 3
+        "failed": 0
       },
       "testScripts": {
-        "total": 3,
+        "total": 5,
         "pending": 0,
         "failed": 0
       },
@@ -226,10 +349,10 @@
       }
     },
     "timings": {
-      "responseAverage": 5119.333333333333,
-      "responseMin": 50,
-      "responseMax": 15028,
-      "responseSd": 7007.114543249754,
+      "responseAverage": 2642.4,
+      "responseMin": 24,
+      "responseMax": 12815,
+      "responseSd": 5086.615794415773,
       "dnsAverage": 0,
       "dnsMin": 0,
       "dnsMax": 0,
@@ -238,25 +361,25 @@
       "firstByteMin": 0,
       "firstByteMax": 0,
       "firstByteSd": 0,
-      "started": 1703282231103,
-      "completed": 1703282246554
+      "started": 1703287395734,
+      "completed": 1703287409055
     },
     "executions": [
       {
         "cursor": {
           "position": 0,
           "iteration": 0,
-          "length": 3,
+          "length": 5,
           "cycles": 1,
           "empty": false,
           "eof": false,
           "bof": true,
           "cr": false,
-          "ref": "2ae1ad6a-10fb-4424-a904-b717f0b20c17",
-          "httpRequestId": "96861967-5da2-4e5b-a85a-711b77e55262"
+          "ref": "5418e4c8-999d-4829-84bb-987907c918ee",
+          "httpRequestId": "93862dd1-6b25-45bc-a38d-9d6ce001f328"
         },
         "item": {
-          "id": "d677bea6-ffd2-4e4d-91c6-6db36e6bdd70",
+          "id": "4be573fe-c608-474e-ba25-0379ac04c34d",
           "name": "GetNearestPharmacy",
           "request": {
             "url": {
@@ -270,11 +393,11 @@
               "query": [
                 {
                   "key": "latitude",
-                  "value": "15"
+                  "value": "27.212"
                 },
                 {
                   "key": "longitude",
-                  "value": "10"
+                  "value": "15.121"
                 }
               ],
               "variable": []
@@ -286,16 +409,28 @@
             {
               "listen": "test",
               "script": {
-                "id": "1f62d1b0-97b9-40eb-a7cf-110f107fa1db",
+                "id": "46efc4c9-3bb4-4dbf-8a9f-6921c0c29c04",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {\r",
-                  "    console.log(\"Running Status code is 200 test 1\");\r",
+                  "    console.log(\"Running Status code is 200 - GetNearestPharmacy\");\r",
                   "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Analizar el cuerpo de la respuesta JSON\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Verificar propiedades específicas del JSON\r",
+                  "pm.test(\"Verify name is Farmacia Alicia y Carlos Rios Artiles 1\", function () {\r",
+                  "    pm.expect(jsonData.name).to.equal(\"Farmacia Alicia y Carlos Rios Artiles 1\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Verify pharmacy id\", function () {\r",
+                  "    pm.expect(jsonData.id).to.equal(3);\r",
                   "});\r",
                   ""
                 ],
-                "_lastExecutionId": "7592457f-a12b-4d13-bf12-9725eb6a2407"
+                "_lastExecutionId": "ddccc6f0-a70d-40b4-9fca-9c7cd5f5453c"
               }
             }
           ]
@@ -314,11 +449,11 @@
             "query": [
               {
                 "key": "latitude",
-                "value": "15"
+                "value": "27.212"
               },
               {
                 "key": "longitude",
-                "value": "10"
+                "value": "15.121"
               }
             ],
             "variable": []
@@ -341,7 +476,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "a8b5cbb0-6917-4148-b525-f46c069feb25",
+              "value": "48412395-0810-47d3-87c3-83124bf6f3b4",
               "system": true
             },
             {
@@ -363,7 +498,7 @@
           "method": "GET"
         },
         "response": {
-          "id": "fd7df526-ff0c-43e0-bf8f-61f496735923",
+          "id": "06b3e8ce-43f9-41cd-b338-1a6dd2d4cb5e",
           "status": "OK",
           "code": 200,
           "header": [
@@ -373,7 +508,7 @@
             },
             {
               "key": "Date",
-              "value": "Fri, 22 Dec 2023 21:57:25 GMT"
+              "value": "Fri, 22 Dec 2023 23:23:28 GMT"
             },
             {
               "key": "Server",
@@ -576,29 +711,572 @@
             ]
           },
           "cookie": [],
-          "responseTime": 15028,
+          "responseTime": 12815,
           "responseSize": 186
         },
-        "id": "d677bea6-ffd2-4e4d-91c6-6db36e6bdd70",
+        "id": "4be573fe-c608-474e-ba25-0379ac04c34d",
         "assertions": [
           {
             "assertion": "Status code is 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify name is Farmacia Alicia y Carlos Rios Artiles 1",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify pharmacy id",
             "skipped": false
           }
         ]
       },
       {
         "cursor": {
-          "ref": "ff8a0730-a535-481e-896c-ae83bf2a4b57",
-          "length": 3,
+          "ref": "05b10876-a989-485f-a4c7-097c744606ce",
+          "length": 5,
           "cycles": 1,
           "position": 1,
           "iteration": 0,
-          "httpRequestId": "3ffbee4c-b7db-44db-b8e7-a0d2fbcb13a4"
+          "httpRequestId": "0ab07892-7e62-4407-b40e-992bb30ac4d5"
         },
         "item": {
-          "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
-          "name": "AddNewPharmacyCorrect",
+          "id": "ebc81886-07f1-4331-a64a-825cf58a9741",
+          "name": "GetPharmacysError",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "farmacia",
+                "ver",
+                "10"
+              ],
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "4c451b00-1fc7-445b-aae7-dbe43269840d",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    console.log(\"Running Status code is 400 GetPharmacysError\");\r",
+                  "    pm.response.to.have.status(400);\r",
+                  "});\r",
+                  "\r",
+                  "// Obtener el cuerpo de la respuesta como texto\r",
+                  "var responseBody = pm.response.text();\r",
+                  "\r",
+                  "// Verificar que la cadena de texto es la esperada\r",
+                  "pm.test(\"Verify response body is message error'\", function () {\r",
+                  "    pm.expect(responseBody).to.equal(\"Farmacia inexistente\");\r",
+                  "});"
+                ],
+                "_lastExecutionId": "58b17306-5719-4d72-ae7a-e26dc4c7d4c3"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "api",
+              "farmacia",
+              "ver",
+              "10"
+            ],
+            "host": [
+              "pharmacyapi"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.28.4",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "cb4433e9-9d96-4eab-babe-4280c809be8b",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "pharmacyapi:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "f0cb5929-13b7-418c-9c9a-88fa0fa7c7be",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 22 Dec 2023 23:23:28 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Kestrel"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              70,
+              97,
+              114,
+              109,
+              97,
+              99,
+              105,
+              97,
+              32,
+              105,
+              110,
+              101,
+              120,
+              105,
+              115,
+              116,
+              101,
+              110,
+              116,
+              101
+            ]
+          },
+          "cookie": [],
+          "responseTime": 162,
+          "responseSize": 20
+        },
+        "id": "ebc81886-07f1-4331-a64a-825cf58a9741",
+        "assertions": [
+          {
+            "assertion": "Status code is 400",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify response body is message error'",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "17958456-f458-45ad-8770-d3ac1c2fb088",
+          "length": 5,
+          "cycles": 1,
+          "position": 2,
+          "iteration": 0,
+          "httpRequestId": "0745da1a-bf4c-4051-b58c-799fcae5e6bc"
+        },
+        "item": {
+          "id": "b8ee2af5-8b27-4acd-a67f-ac800da1a8cd",
+          "name": "GetPharmacysOk",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "farmacia",
+                "ver",
+                "3"
+              ],
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "e8f15a84-eb3d-4f5f-b4ca-3db1e33efedc",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    console.log(\"Running Status code is 200 - GetPharmacysOk\");\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "// Analizar el cuerpo de la respuesta JSON\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Verificar propiedades específicas del JSON\r",
+                  "pm.test(\"Verify name is Farmacia Alicia y Carlos Rios Artiles 1\", function () {\r",
+                  "    pm.expect(jsonData.name).to.equal(\"Farmacia Alicia y Carlos Rios Artiles 1\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Verify pharmacy id\", function () {\r",
+                  "    pm.expect(jsonData.id).to.equal(3);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Verify pharmacy latitue\", function () {\r",
+                  "    pm.expect(jsonData.latitude).to.equal(28.137670876923);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Verify pharmacy latitue\", function () {\r",
+                  "    pm.expect(jsonData.longitude).to.equal(-15.42966616);\r",
+                  "});\r",
+                  ""
+                ],
+                "_lastExecutionId": "8c88f235-d740-44a2-9778-fff0858bb6a5"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "api",
+              "farmacia",
+              "ver",
+              "3"
+            ],
+            "host": [
+              "pharmacyapi"
+            ],
+            "query": [],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.28.4",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "d132c7e3-25b0-48d1-846f-d0c51fc4d11e",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "pharmacyapi:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "dc7bf32b-3ed3-46ee-b8c4-6972920230d8",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 22 Dec 2023 23:23:28 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Kestrel"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              70,
+              97,
+              114,
+              109,
+              97,
+              99,
+              105,
+              97,
+              32,
+              65,
+              108,
+              105,
+              99,
+              105,
+              97,
+              32,
+              121,
+              32,
+              67,
+              97,
+              114,
+              108,
+              111,
+              115,
+              32,
+              82,
+              105,
+              111,
+              115,
+              32,
+              65,
+              114,
+              116,
+              105,
+              108,
+              101,
+              115,
+              32,
+              49,
+              34,
+              44,
+              34,
+              97,
+              100,
+              100,
+              114,
+              101,
+              115,
+              115,
+              34,
+              58,
+              34,
+              67,
+              46,
+              32,
+              80,
+              100,
+              116,
+              101,
+              46,
+              32,
+              65,
+              108,
+              118,
+              101,
+              97,
+              114,
+              44,
+              32,
+              56,
+              44,
+              32,
+              51,
+              53,
+              48,
+              48,
+              54,
+              32,
+              76,
+              97,
+              115,
+              32,
+              80,
+              97,
+              108,
+              109,
+              97,
+              115,
+              32,
+              100,
+              101,
+              32,
+              71,
+              114,
+              97,
+              110,
+              32,
+              67,
+              97,
+              110,
+              97,
+              114,
+              105,
+              97,
+              44,
+              32,
+              76,
+              97,
+              115,
+              32,
+              80,
+              97,
+              108,
+              109,
+              97,
+              115,
+              34,
+              44,
+              34,
+              108,
+              97,
+              116,
+              105,
+              116,
+              117,
+              100,
+              101,
+              34,
+              58,
+              50,
+              56,
+              46,
+              49,
+              51,
+              55,
+              54,
+              55,
+              48,
+              56,
+              55,
+              54,
+              57,
+              50,
+              51,
+              44,
+              34,
+              108,
+              111,
+              110,
+              103,
+              105,
+              116,
+              117,
+              100,
+              101,
+              34,
+              58,
+              45,
+              49,
+              53,
+              46,
+              52,
+              50,
+              57,
+              54,
+              54,
+              54,
+              49,
+              54,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 49,
+          "responseSize": 186
+        },
+        "id": "b8ee2af5-8b27-4acd-a67f-ac800da1a8cd",
+        "assertions": [
+          {
+            "assertion": "Status code is 200",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify name is Farmacia Alicia y Carlos Rios Artiles 1",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify pharmacy id",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify pharmacy latitue",
+            "skipped": false
+          },
+          {
+            "assertion": "Verify pharmacy latitue",
+            "skipped": false
+          }
+        ]
+      },
+      {
+        "cursor": {
+          "ref": "2d34b7f7-062f-4478-82e9-73cc3be9c7d2",
+          "length": 5,
+          "cycles": 1,
+          "position": 3,
+          "iteration": 0,
+          "httpRequestId": "5f53064e-93b1-4a9e-b998-26e4938b6926"
+        },
+        "item": {
+          "id": "a77aadde-ba3d-4f07-9690-2b3c82a1c38a",
+          "name": "AddPharmacyOk",
           "request": {
             "url": {
               "path": [
@@ -615,7 +1293,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia Nueva para test unitario\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -628,19 +1306,23 @@
             {
               "listen": "test",
               "script": {
-                "id": "07143924-0871-46ed-b826-563f42cc2079",
+                "id": "dc0b8496-8002-4cda-a331-b8b1990e4721",
                 "type": "text/javascript",
                 "exec": [
                   "pm.test(\"Status code is 200\", function () {\r",
-                  "    console.log(\"Running Status code is 200 test 2\");\r",
+                  "    console.log(\"Running Status code is 200 - AddPharmacyOk\");\r",
                   "    pm.response.to.have.status(200);\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Successful POST request\", function () {\r",
-                  "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+                  "// Analizar el cuerpo de la respuesta JSON\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "// Verificar propiedades específicas del JSON\r",
+                  "pm.test(\"Verify name is Farmacia Nueva para test unitario\", function () {\r",
+                  "    pm.expect(jsonData.name).to.equal(\"Farmacia Nueva para test unitario\");\r",
                   "});"
                 ],
-                "_lastExecutionId": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
+                "_lastExecutionId": "ef5648e7-a343-423f-ac52-bdf8fdc0bc6c"
               }
             }
           ]
@@ -683,7 +1365,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "95a84da0-daec-43cf-9916-fd32960ef074",
+              "value": "56e4befb-28b9-4223-9b2d-2e9c96dde0f5",
               "system": true
             },
             {
@@ -703,14 +1385,14 @@
             },
             {
               "key": "Content-Length",
-              "value": "134",
+              "value": "154",
               "system": true
             }
           ],
           "method": "POST",
           "body": {
             "mode": "raw",
-            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia Nueva para test unitario\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -719,7 +1401,7 @@
           }
         },
         "response": {
-          "id": "d9e52ce3-8e7a-4a73-b8a2-517da2196b72",
+          "id": "c4866ddc-6c3c-4d11-9ed0-1dff89ff6026",
           "status": "OK",
           "code": 200,
           "header": [
@@ -729,7 +1411,7 @@
             },
             {
               "key": "Date",
-              "value": "Fri, 22 Dec 2023 21:57:25 GMT"
+              "value": "Fri, 22 Dec 2023 23:23:28 GMT"
             },
             {
               "key": "Server",
@@ -768,15 +1450,30 @@
               105,
               97,
               32,
-              100,
-              101,
-              32,
-              112,
-              114,
+              78,
               117,
               101,
-              98,
+              118,
               97,
+              32,
+              112,
+              97,
+              114,
+              97,
+              32,
+              116,
+              101,
+              115,
+              116,
+              32,
+              117,
+              110,
+              105,
+              116,
+              97,
+              114,
+              105,
+              111,
               34,
               44,
               34,
@@ -793,21 +1490,25 @@
               68,
               105,
               114,
-              101,
               99,
               99,
               105,
               111,
               110,
               32,
-              100,
-              101,
-              32,
-              112,
+              70,
+              97,
               114,
+              109,
+              97,
+              99,
+              105,
+              97,
+              32,
+              78,
               117,
               101,
-              98,
+              118,
               97,
               34,
               44,
@@ -823,12 +1524,11 @@
               34,
               58,
               49,
-              48,
-              46,
               53,
+              46,
+              57,
               48,
-              48,
-              52,
+              57,
               44,
               34,
               108,
@@ -843,49 +1543,44 @@
               34,
               58,
               45,
-              56,
+              57,
               46,
               50,
-              54,
-              54,
+              51,
+              49,
+              50,
+              51,
               125
             ]
           },
           "cookie": [],
-          "responseTime": 280,
-          "responseSize": 106
+          "responseTime": 162,
+          "responseSize": 126
         },
-        "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
+        "id": "a77aadde-ba3d-4f07-9690-2b3c82a1c38a",
         "assertions": [
           {
             "assertion": "Status code is 200",
             "skipped": false
           },
           {
-            "assertion": "Successful POST request",
-            "skipped": false,
-            "error": {
-              "name": "AssertionError",
-              "index": 1,
-              "test": "Successful POST request",
-              "message": "expected 200 to be one of [ 201, 202 ]",
-              "stack": "AssertionError: expected 200 to be one of [ 201, 202 ]\n   at Object.eval sandbox-script.js:2:2)"
-            }
+            "assertion": "Verify name is Farmacia Nueva para test unitario",
+            "skipped": false
           }
         ]
       },
       {
         "cursor": {
-          "ref": "0caef987-dd11-450d-8c6e-6cc5804e2d36",
-          "length": 3,
+          "ref": "5bc2914d-ad26-4784-aedf-5a2cb6ba628b",
+          "length": 5,
           "cycles": 1,
-          "position": 2,
+          "position": 4,
           "iteration": 0,
-          "httpRequestId": "83346ee6-03f8-4f6e-a8de-a95ff6eeb644"
+          "httpRequestId": "5e9faae6-f966-498a-b2c4-581b98a905db"
         },
         "item": {
-          "id": "ba049607-abea-49de-aa47-904df1966c53",
-          "name": "AddNewPharmacyError",
+          "id": "dcf74f2d-ca80-48c4-b6c6-32b48019fd13",
+          "name": "AdPharmacyError",
           "request": {
             "url": {
               "path": [
@@ -902,7 +1597,7 @@
             "method": "POST",
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -915,19 +1610,23 @@
             {
               "listen": "test",
               "script": {
-                "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
+                "id": "c37155bd-efc0-476e-889b-3ab823b24d59",
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    console.log(\"Running Status code is 200 test 3\");\r",
-                  "    pm.response.to.have.status(200);\r",
+                  "pm.test(\"Status code is 400\", function () {\r",
+                  "    console.log(\"Running Status code is 400 - AddPharmacyOk\");\r",
+                  "    pm.response.to.have.status(400);\r",
                   "});\r",
                   "\r",
-                  "pm.test(\"Successful POST request\", function () {\r",
-                  "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+                  "// Obtener el cuerpo de la respuesta como texto\r",
+                  "var responseBody = pm.response.text();\r",
+                  "\r",
+                  "// Verificar que la cadena de texto es la esperada\r",
+                  "pm.test(\"Verify response body is message error'\", function () {\r",
+                  "    pm.expect(responseBody).to.equal(\"No se ha podido dar de alta la farmacia : No se puede dar de alta una farmacia sin el nombre.\");\r",
                   "});"
                 ],
-                "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
+                "_lastExecutionId": "d2da9460-254e-4839-85ae-4576cacfd6b1"
               }
             }
           ]
@@ -970,7 +1669,7 @@
             },
             {
               "key": "Postman-Token",
-              "value": "e1a3b23b-52ea-4d20-b439-7aef2d7ae841",
+              "value": "eb1ae0a0-77f5-421e-81d5-acee002c3031",
               "system": true
             },
             {
@@ -990,14 +1689,14 @@
             },
             {
               "key": "Content-Length",
-              "value": "116",
+              "value": "121",
               "system": true
             }
           ],
           "method": "POST",
           "body": {
             "mode": "raw",
-            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+            "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Dirccion Farmacia Nueva\",\r\n  \"latitude\": 15.9090,\r\n  \"longitude\": -9.23123\r\n}",
             "options": {
               "raw": {
                 "language": "json"
@@ -1006,7 +1705,7 @@
           }
         },
         "response": {
-          "id": "9533bc8e-53d5-4481-8e4d-5cc3279a6475",
+          "id": "055086f7-6825-4199-ba20-cce9cf191b1d",
           "status": "Bad Request",
           "code": 400,
           "header": [
@@ -1016,7 +1715,7 @@
             },
             {
               "key": "Date",
-              "value": "Fri, 22 Dec 2023 21:57:26 GMT"
+              "value": "Fri, 22 Dec 2023 23:23:28 GMT"
             },
             {
               "key": "Server",
@@ -1126,764 +1825,26 @@
             ]
           },
           "cookie": [],
-          "responseTime": 50,
+          "responseTime": 24,
           "responseSize": 93
         },
-        "id": "ba049607-abea-49de-aa47-904df1966c53",
+        "id": "dcf74f2d-ca80-48c4-b6c6-32b48019fd13",
         "assertions": [
           {
-            "assertion": "Status code is 200",
-            "skipped": false,
-            "error": {
-              "name": "AssertionError",
-              "index": 0,
-              "test": "Status code is 200",
-              "message": "expected response to have status code 200 but got 400",
-              "stack": "AssertionError: expected response to have status code 200 but got 400\n   at Object.eval sandbox-script.js:1:3)"
-            }
+            "assertion": "Status code is 400",
+            "skipped": false
           },
           {
-            "assertion": "Successful POST request",
-            "skipped": false,
-            "error": {
-              "name": "AssertionError",
-              "index": 1,
-              "test": "Successful POST request",
-              "message": "expected 400 to be one of [ 201, 202 ]",
-              "stack": "AssertionError: expected 400 to be one of [ 201, 202 ]\n   at Object.eval sandbox-script.js:2:3)"
-            }
+            "assertion": "Verify response body is message error'",
+            "skipped": false
           }
         ]
       }
     ],
     "transfers": {
-      "responseTotal": 385
+      "responseTotal": 611
     },
-    "failures": [
-      {
-        "error": {
-          "name": "AssertionError",
-          "index": 1,
-          "test": "Successful POST request",
-          "message": "expected 200 to be one of [ 201, 202 ]",
-          "stack": "AssertionError: expected 200 to be one of [ 201, 202 ]\n   at Object.eval sandbox-script.js:2:2)",
-          "checksum": "730370ed1fdac6c25995bc2f38127bd4",
-          "id": "baea771e-d521-4ac7-a0bb-5e8f43c977c2",
-          "timestamp": 1703282246481,
-          "stacktrace": [
-            {
-              "fileName": "sandbox-script.js",
-              "lineNumber": 2,
-              "functionName": "Object.eval",
-              "typeName": "Object",
-              "methodName": "eval",
-              "columnNumber": 2,
-              "native": false
-            }
-          ]
-        },
-        "at": "assertion:1 in test-script",
-        "source": {
-          "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
-          "name": "AddNewPharmacyCorrect",
-          "request": {
-            "url": {
-              "path": [
-                "api",
-                "farmacia",
-                "agregar"
-              ],
-              "host": [
-                "{{BaseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "method": "POST",
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [],
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "07143924-0871-46ed-b826-563f42cc2079",
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    console.log(\"Running Status code is 200 test 2\");\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Successful POST request\", function () {\r",
-                  "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                  "});"
-                ],
-                "_lastExecutionId": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
-              }
-            }
-          ]
-        },
-        "parent": {
-          "_": {
-            "postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
-            "exporter_id": "31961791"
-          },
-          "item": [
-            {
-              "id": "d677bea6-ffd2-4e4d-91c6-6db36e6bdd70",
-              "name": "GetNearestPharmacy",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "latitude",
-                      "value": "15"
-                    },
-                    {
-                      "key": "longitude",
-                      "value": "10"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET"
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "1f62d1b0-97b9-40eb-a7cf-110f107fa1db",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 1\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      ""
-                    ],
-                    "_lastExecutionId": "7592457f-a12b-4d13-bf12-9725eb6a2407"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
-              "name": "AddNewPharmacyCorrect",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia",
-                    "agregar"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "07143924-0871-46ed-b826-563f42cc2079",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 2\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"Successful POST request\", function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                      "});"
-                    ],
-                    "_lastExecutionId": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "ba049607-abea-49de-aa47-904df1966c53",
-              "name": "AddNewPharmacyError",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia",
-                    "agregar"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 3\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"Successful POST request\", function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                      "});"
-                    ],
-                    "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-                  }
-                }
-              ]
-            }
-          ],
-          "event": [],
-          "variable": [],
-          "info": {
-            "_postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
-            "name": "APITest",
-            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-          }
-        },
-        "cursor": {
-          "ref": "ff8a0730-a535-481e-896c-ae83bf2a4b57",
-          "length": 3,
-          "cycles": 1,
-          "position": 1,
-          "iteration": 0,
-          "httpRequestId": "3ffbee4c-b7db-44db-b8e7-a0d2fbcb13a4",
-          "scriptId": "07143924-0871-46ed-b826-563f42cc2079",
-          "execution": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
-        }
-      },
-      {
-        "error": {
-          "name": "AssertionError",
-          "index": 0,
-          "test": "Status code is 200",
-          "message": "expected response to have status code 200 but got 400",
-          "stack": "AssertionError: expected response to have status code 200 but got 400\n   at Object.eval sandbox-script.js:1:3)",
-          "checksum": "63f5089d6fd02906ce2997a7c9efa585",
-          "id": "30862068-b7b8-422a-a599-6c9321689928",
-          "timestamp": 1703282246549,
-          "stacktrace": [
-            {
-              "fileName": "sandbox-script.js",
-              "lineNumber": 1,
-              "functionName": "Object.eval",
-              "typeName": "Object",
-              "methodName": "eval",
-              "columnNumber": 3,
-              "native": false
-            }
-          ]
-        },
-        "at": "assertion:0 in test-script",
-        "source": {
-          "id": "ba049607-abea-49de-aa47-904df1966c53",
-          "name": "AddNewPharmacyError",
-          "request": {
-            "url": {
-              "path": [
-                "api",
-                "farmacia",
-                "agregar"
-              ],
-              "host": [
-                "{{BaseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "method": "POST",
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [],
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    console.log(\"Running Status code is 200 test 3\");\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Successful POST request\", function () {\r",
-                  "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                  "});"
-                ],
-                "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-              }
-            }
-          ]
-        },
-        "parent": {
-          "_": {
-            "postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
-            "exporter_id": "31961791"
-          },
-          "item": [
-            {
-              "id": "d677bea6-ffd2-4e4d-91c6-6db36e6bdd70",
-              "name": "GetNearestPharmacy",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "latitude",
-                      "value": "15"
-                    },
-                    {
-                      "key": "longitude",
-                      "value": "10"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET"
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "1f62d1b0-97b9-40eb-a7cf-110f107fa1db",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 1\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      ""
-                    ],
-                    "_lastExecutionId": "7592457f-a12b-4d13-bf12-9725eb6a2407"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
-              "name": "AddNewPharmacyCorrect",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia",
-                    "agregar"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "07143924-0871-46ed-b826-563f42cc2079",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 2\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"Successful POST request\", function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                      "});"
-                    ],
-                    "_lastExecutionId": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "ba049607-abea-49de-aa47-904df1966c53",
-              "name": "AddNewPharmacyError",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia",
-                    "agregar"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 3\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"Successful POST request\", function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                      "});"
-                    ],
-                    "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-                  }
-                }
-              ]
-            }
-          ],
-          "event": [],
-          "variable": [],
-          "info": {
-            "_postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
-            "name": "APITest",
-            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-          }
-        },
-        "cursor": {
-          "ref": "0caef987-dd11-450d-8c6e-6cc5804e2d36",
-          "length": 3,
-          "cycles": 1,
-          "position": 2,
-          "iteration": 0,
-          "httpRequestId": "83346ee6-03f8-4f6e-a8de-a95ff6eeb644",
-          "scriptId": "123031bc-6287-474c-ad82-eb3b3dcab095",
-          "execution": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-        }
-      },
-      {
-        "error": {
-          "name": "AssertionError",
-          "index": 1,
-          "test": "Successful POST request",
-          "message": "expected 400 to be one of [ 201, 202 ]",
-          "stack": "AssertionError: expected 400 to be one of [ 201, 202 ]\n   at Object.eval sandbox-script.js:2:3)",
-          "checksum": "8dabd7a16ceda4c113ebad91a17706f0",
-          "id": "b50f03aa-5aad-40a9-b739-fbc4625b8165",
-          "timestamp": 1703282246549,
-          "stacktrace": [
-            {
-              "fileName": "sandbox-script.js",
-              "lineNumber": 2,
-              "functionName": "Object.eval",
-              "typeName": "Object",
-              "methodName": "eval",
-              "columnNumber": 3,
-              "native": false
-            }
-          ]
-        },
-        "at": "assertion:1 in test-script",
-        "source": {
-          "id": "ba049607-abea-49de-aa47-904df1966c53",
-          "name": "AddNewPharmacyError",
-          "request": {
-            "url": {
-              "path": [
-                "api",
-                "farmacia",
-                "agregar"
-              ],
-              "host": [
-                "{{BaseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "method": "POST",
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [],
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
-                "type": "text/javascript",
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    console.log(\"Running Status code is 200 test 3\");\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Successful POST request\", function () {\r",
-                  "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                  "});"
-                ],
-                "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-              }
-            }
-          ]
-        },
-        "parent": {
-          "_": {
-            "postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
-            "exporter_id": "31961791"
-          },
-          "item": [
-            {
-              "id": "d677bea6-ffd2-4e4d-91c6-6db36e6bdd70",
-              "name": "GetNearestPharmacy",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "latitude",
-                      "value": "15"
-                    },
-                    {
-                      "key": "longitude",
-                      "value": "10"
-                    }
-                  ],
-                  "variable": []
-                },
-                "method": "GET"
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "1f62d1b0-97b9-40eb-a7cf-110f107fa1db",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 1\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      ""
-                    ],
-                    "_lastExecutionId": "7592457f-a12b-4d13-bf12-9725eb6a2407"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "1a89d837-1cee-4eae-bcb2-0b778f74aec0",
-              "name": "AddNewPharmacyCorrect",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia",
-                    "agregar"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "07143924-0871-46ed-b826-563f42cc2079",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 2\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"Successful POST request\", function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                      "});"
-                    ],
-                    "_lastExecutionId": "ff2b2128-e212-4a71-be41-2d9e49ebd394"
-                  }
-                }
-              ]
-            },
-            {
-              "id": "ba049607-abea-49de-aa47-904df1966c53",
-              "name": "AddNewPharmacyError",
-              "request": {
-                "url": {
-                  "path": [
-                    "api",
-                    "farmacia",
-                    "agregar"
-                  ],
-                  "host": [
-                    "{{BaseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "response": [],
-              "event": [
-                {
-                  "listen": "test",
-                  "script": {
-                    "id": "123031bc-6287-474c-ad82-eb3b3dcab095",
-                    "type": "text/javascript",
-                    "exec": [
-                      "pm.test(\"Status code is 200\", function () {\r",
-                      "    console.log(\"Running Status code is 200 test 3\");\r",
-                      "    pm.response.to.have.status(200);\r",
-                      "});\r",
-                      "\r",
-                      "pm.test(\"Successful POST request\", function () {\r",
-                      "    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
-                      "});"
-                    ],
-                    "_lastExecutionId": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-                  }
-                }
-              ]
-            }
-          ],
-          "event": [],
-          "variable": [],
-          "info": {
-            "_postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
-            "name": "APITest",
-            "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-          }
-        },
-        "cursor": {
-          "ref": "0caef987-dd11-450d-8c6e-6cc5804e2d36",
-          "length": 3,
-          "cycles": 1,
-          "position": 2,
-          "iteration": 0,
-          "httpRequestId": "83346ee6-03f8-4f6e-a8de-a95ff6eeb644",
-          "scriptId": "123031bc-6287-474c-ad82-eb3b3dcab095",
-          "execution": "0b0317a1-7a5a-4bec-9d99-0b3f7bca5825"
-        }
-      }
-    ],
+    "failures": [],
     "error": null
   }
 }
