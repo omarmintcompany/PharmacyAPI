@@ -1,4 +1,5 @@
-﻿using PharmacyAPI.Models.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using PharmacyAPI.Models.Repositories;
 using PharmacyAPI.Persistence;
 using PharmacyAPI.Resources;
 
@@ -9,15 +10,21 @@ namespace PharmacyAPI.Repositories
 
         public PharmacyRepository(PharmacyContext context) : base(context) { }
 
+        public async Task<List<Pharmacys>> GetPharmacysList() 
+        { 
+            return _context.Pharmacys.ToList();
+        }
 
-        public Pharmacys? GetPharmacy(int pharmacyId)
+        public async Task<Pharmacys?> GetPharmacy(int pharmacyId)
         {
-            return _context.Pharmacys.Where(x => x.Id == pharmacyId).FirstOrDefault();
+            IQueryable<Pharmacys> query = _context.Pharmacys.Where(t => t.Id == pharmacyId);
+
+            return await query.FirstOrDefaultAsync();
         }
 
         public Pharmacys? checkPharmacy(PharmacyResource pharmacyResource)
         {
-            return _context.Pharmacys.Where(x => x.PharmacyName == pharmacyResource.Name && x.Latitude == pharmacyResource.Latitude && x.Longitude == pharmacyResource.Latitude).FirstOrDefault();
+            return _context.Pharmacys.Where(x => x.PharmacyName == pharmacyResource.Name && x.Latitude == pharmacyResource.Latitude && x.Longitude == pharmacyResource.Longitude).FirstOrDefault();
         }
 
         public async Task<Pharmacys> Add(Pharmacys pharmacyData)
