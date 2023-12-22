@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="APITest" tests="1" time="14.174">
+  <testsuite name="GetNearestPharmacy" id="9c9b7306-36fb-4fb4-8271-ef7ebd4b5bdb" timestamp="2023-12-22T14:30:17.987Z" tests="1" failures="0" errors="0" time="14.174">
+    <testcase name="Status code is 200" time="14.174" classname="ApiTest"/>
+  </testsuite>
+</testsuites>

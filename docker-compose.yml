@@ -1,27 +1,6 @@
 version: '3.4'
 
 services:
-  pharmacyapi:
-    image: ${DOCKER_REGISTRY-}pharmacyapi
-    build:
-     context: .
-     dockerfile: PharmacyAPI/Dockerfile
-    logging:
-         driver: "json-file"
-         options:
-            max-file: "5"
-            max-size: 100m
-    ports:
-    - 5001:80
-    - 7001:443 
-    environment:   
-      ASPNETCORE_URLS: "https://+:443;http://+:80"
-      ASPNETCORE_ENVIRONMENT: "Development"  
-    networks:
-      - my_network
-    depends_on:
-      - sql_server
-
   sql_server:
     image: mcr.microsoft.com/mssql/server
     container_name: sql_server_container
@@ -32,7 +11,24 @@ services:
     ports:
       - "1433:1433"
     networks:
-      - my_network      
+      - my_network   
+
+  pharmacyapi:
+    image: pharmacyapi
+    build:
+     context: .
+     dockerfile: PharmacyAPI/Dockerfile
+    logging:
+         driver: "json-file"
+         options:
+            max-file: "5"
+            max-size: 100m
+    ports:
+      - 8080:8080
+    networks:
+      - my_network
+    depends_on:
+      - sql_server     
 
   ejecutar_script:
     image: mcr.microsoft.com/mssql-tools
@@ -43,5 +39,20 @@ services:
       - ./sql-scripts:/scripts
     networks:
       - my_network
+  tests: 
+    image: functional-tests
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    entrypoint: newman
+    command: run APITest.postman_collection.json  --environment=testapi-enviroment.postman_environment.json --env-var="BaseUrl=http://pharmacyapi:8080" --reporters cli,json,junit --reporter-junit-export /data/results/TEST-Integration-Report.xml  --reporter-json-export /data/results/outputfile.json
+    volumes:
+      - ./results:/data/results
+    depends_on:
+      - pharmacyapi
+      - sql_server
+    networks:
+      - my_network
+
 networks:
   my_network:

@@ -1,0 +1,495 @@
+{
+  "collection": {
+    "_": {
+      "postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
+      "exporter_id": "31961791"
+    },
+    "item": [
+      {
+        "id": "9c9b7306-36fb-4fb4-8271-ef7ebd4b5bdb",
+        "name": "GetNearestPharmacy",
+        "request": {
+          "url": {
+            "path": [
+              "api",
+              "farmacia"
+            ],
+            "host": [
+              "{{BaseUrl}}"
+            ],
+            "query": [
+              {
+                "key": "latitude",
+                "value": "15"
+              },
+              {
+                "key": "longitude",
+                "value": "10"
+              }
+            ],
+            "variable": []
+          },
+          "method": "GET"
+        },
+        "response": [],
+        "event": [
+          {
+            "listen": "test",
+            "script": {
+              "id": "7c4ca4aa-ba2f-48d8-8a8e-dc41b65e206a",
+              "type": "text/javascript",
+              "exec": [
+                "pm.test(\"Status code is 200\", function () {\r",
+                "    pm.response.to.have.status(200);\r",
+                "});"
+              ],
+              "_lastExecutionId": "95ca4af9-37c7-4f9d-91e6-34f670e95b6a"
+            }
+          }
+        ]
+      }
+    ],
+    "event": [],
+    "variable": [],
+    "info": {
+      "_postman_id": "d158146c-b12b-4035-9fee-38c9899a0abe",
+      "name": "APITest",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    }
+  },
+  "environment": {
+    "_": {
+      "postman_variable_scope": "environment",
+      "postman_exported_at": "2023-12-22T13:10:16.340Z",
+      "postman_exported_using": "Postman/10.21.9"
+    },
+    "id": "f6e7c2cf-2e5b-4c75-8e3f-b2c239cb5eb4",
+    "name": "testapi-enviroment",
+    "values": [
+      {
+        "type": "any",
+        "value": "http://pharmacyapi:8080",
+        "key": "BaseUrl"
+      }
+    ]
+  },
+  "globals": {
+    "id": "72df8d63-e6b0-4774-b481-10b698d7cc52",
+    "values": []
+  },
+  "run": {
+    "stats": {
+      "iterations": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "items": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "scripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "requests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "tests": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "assertions": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "testScripts": {
+        "total": 1,
+        "pending": 0,
+        "failed": 0
+      },
+      "prerequestScripts": {
+        "total": 0,
+        "pending": 0,
+        "failed": 0
+      }
+    },
+    "timings": {
+      "responseAverage": 14174,
+      "responseMin": 14174,
+      "responseMax": 14174,
+      "responseSd": 0,
+      "dnsAverage": 0,
+      "dnsMin": 0,
+      "dnsMax": 0,
+      "dnsSd": 0,
+      "firstByteAverage": 0,
+      "firstByteMin": 0,
+      "firstByteMax": 0,
+      "firstByteSd": 0,
+      "started": 1703255417987,
+      "completed": 1703255432201
+    },
+    "executions": [
+      {
+        "cursor": {
+          "position": 0,
+          "iteration": 0,
+          "length": 1,
+          "cycles": 1,
+          "empty": false,
+          "eof": false,
+          "bof": true,
+          "cr": false,
+          "ref": "0b789ab6-0528-490a-bdf0-c6b178d8274c",
+          "httpRequestId": "6a2b4a6c-751e-43dd-ab2a-ce0b3c5ba903"
+        },
+        "item": {
+          "id": "9c9b7306-36fb-4fb4-8271-ef7ebd4b5bdb",
+          "name": "GetNearestPharmacy",
+          "request": {
+            "url": {
+              "path": [
+                "api",
+                "farmacia"
+              ],
+              "host": [
+                "{{BaseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "latitude",
+                  "value": "15"
+                },
+                {
+                  "key": "longitude",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "7c4ca4aa-ba2f-48d8-8a8e-dc41b65e206a",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});"
+                ],
+                "_lastExecutionId": "95ca4af9-37c7-4f9d-91e6-34f670e95b6a"
+              }
+            }
+          ]
+        },
+        "request": {
+          "url": {
+            "protocol": "http",
+            "port": "8080",
+            "path": [
+              "api",
+              "farmacia"
+            ],
+            "host": [
+              "pharmacyapi"
+            ],
+            "query": [
+              {
+                "key": "latitude",
+                "value": "15"
+              },
+              {
+                "key": "longitude",
+                "value": "10"
+              }
+            ],
+            "variable": []
+          },
+          "header": [
+            {
+              "key": "User-Agent",
+              "value": "PostmanRuntime/7.28.4",
+              "system": true
+            },
+            {
+              "key": "Accept",
+              "value": "*/*",
+              "system": true
+            },
+            {
+              "key": "Cache-Control",
+              "value": "no-cache",
+              "system": true
+            },
+            {
+              "key": "Postman-Token",
+              "value": "e93c6c57-f715-4adb-9a9d-f318a0dda6ea",
+              "system": true
+            },
+            {
+              "key": "Host",
+              "value": "pharmacyapi:8080",
+              "system": true
+            },
+            {
+              "key": "Accept-Encoding",
+              "value": "gzip, deflate, br",
+              "system": true
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive",
+              "system": true
+            }
+          ],
+          "method": "GET"
+        },
+        "response": {
+          "id": "a2734c2c-8ab9-45ad-aeec-ecb8fc131c25",
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json; charset=utf-8"
+            },
+            {
+              "key": "Date",
+              "value": "Fri, 22 Dec 2023 14:30:31 GMT"
+            },
+            {
+              "key": "Server",
+              "value": "Kestrel"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            }
+          ],
+          "stream": {
+            "type": "Buffer",
+            "data": [
+              123,
+              34,
+              105,
+              100,
+              34,
+              58,
+              51,
+              44,
+              34,
+              110,
+              97,
+              109,
+              101,
+              34,
+              58,
+              34,
+              70,
+              97,
+              114,
+              109,
+              97,
+              99,
+              105,
+              97,
+              32,
+              65,
+              108,
+              105,
+              99,
+              105,
+              97,
+              32,
+              121,
+              32,
+              67,
+              97,
+              114,
+              108,
+              111,
+              115,
+              32,
+              82,
+              105,
+              111,
+              115,
+              32,
+              65,
+              114,
+              116,
+              105,
+              108,
+              101,
+              115,
+              32,
+              49,
+              34,
+              44,
+              34,
+              97,
+              100,
+              100,
+              114,
+              101,
+              115,
+              115,
+              34,
+              58,
+              34,
+              67,
+              46,
+              32,
+              80,
+              100,
+              116,
+              101,
+              46,
+              32,
+              65,
+              108,
+              118,
+              101,
+              97,
+              114,
+              44,
+              32,
+              56,
+              44,
+              32,
+              51,
+              53,
+              48,
+              48,
+              54,
+              32,
+              76,
+              97,
+              115,
+              32,
+              80,
+              97,
+              108,
+              109,
+              97,
+              115,
+              32,
+              100,
+              101,
+              32,
+              71,
+              114,
+              97,
+              110,
+              32,
+              67,
+              97,
+              110,
+              97,
+              114,
+              105,
+              97,
+              44,
+              32,
+              76,
+              97,
+              115,
+              32,
+              80,
+              97,
+              108,
+              109,
+              97,
+              115,
+              34,
+              44,
+              34,
+              108,
+              97,
+              116,
+              105,
+              116,
+              117,
+              100,
+              101,
+              34,
+              58,
+              50,
+              56,
+              46,
+              49,
+              51,
+              55,
+              54,
+              55,
+              48,
+              56,
+              55,
+              54,
+              57,
+              50,
+              51,
+              44,
+              34,
+              108,
+              111,
+              110,
+              103,
+              105,
+              116,
+              117,
+              100,
+              101,
+              34,
+              58,
+              45,
+              49,
+              53,
+              46,
+              52,
+              50,
+              57,
+              54,
+              54,
+              54,
+              49,
+              54,
+              125
+            ]
+          },
+          "cookie": [],
+          "responseTime": 14174,
+          "responseSize": 186
+        },
+        "id": "9c9b7306-36fb-4fb4-8271-ef7ebd4b5bdb",
+        "assertions": [
+          {
+            "assertion": "Status code is 200",
+            "skipped": false
+          }
+        ]
+      }
+    ],
+    "transfers": {
+      "responseTotal": 186
+    },
+    "failures": [],
+    "error": null
+  }
+}
