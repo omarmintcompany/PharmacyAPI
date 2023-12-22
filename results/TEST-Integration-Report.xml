@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="APITest" tests="1" time="14.174">
-  <testsuite name="GetNearestPharmacy" id="9c9b7306-36fb-4fb4-8271-ef7ebd4b5bdb" timestamp="2023-12-22T14:30:17.987Z" tests="1" failures="0" errors="0" time="14.174">
-    <testcase name="Status code is 200" time="14.174" classname="ApiTest"/>
+<testsuites name="APITest" tests="3" time="15.358">
+  <testsuite name="GetNearestPharmacy" id="d677bea6-ffd2-4e4d-91c6-6db36e6bdd70" timestamp="2023-12-22T21:57:11.103Z" tests="1" failures="0" errors="0" time="15.028">
+    <testcase name="Status code is 200" time="15.028" classname="ApiTest"/>
+  </testsuite>
+  <testsuite name="AddNewPharmacyCorrect" id="1a89d837-1cee-4eae-bcb2-0b778f74aec0" timestamp="2023-12-22T21:57:11.103Z" tests="2" failures="1" errors="0" time="0.280">
+    <testcase name="Status code is 200" time="0.280" classname="ApiTest"/>
+    <testcase name="Successful POST request" time="0.280" classname="ApiTest">
+      <failure type="AssertionFailure" message="expected 200 to be one of [ 201, 202 ]">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: d158146c-b12b-4035-9fee-38c9899a0abe.]]>
+        <![CDATA[Collection name: APITest.]]>
+        <![CDATA[Request name: AddNewPharmacyCorrect.]]>
+        <![CDATA[Test description: Successful POST request.]]>
+        <![CDATA[Error message: expected 200 to be one of [ 201, 202 ].]]>
+        <![CDATA[Stacktrace: AssertionError: expected 200 to be one of [ 201, 202 ]
+   at Object.eval sandbox-script.js:2:2).]]>
+      </failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="AddNewPharmacyError" id="ba049607-abea-49de-aa47-904df1966c53" timestamp="2023-12-22T21:57:11.103Z" tests="2" failures="2" errors="0" time="0.050">
+    <testcase name="Status code is 200" time="0.050" classname="ApiTest">
+      <failure type="AssertionFailure" message="expected response to have status code 200 but got 400">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: d158146c-b12b-4035-9fee-38c9899a0abe.]]>
+        <![CDATA[Collection name: APITest.]]>
+        <![CDATA[Request name: AddNewPharmacyError.]]>
+        <![CDATA[Test description: Status code is 200.]]>
+        <![CDATA[Error message: expected response to have status code 200 but got 400.]]>
+        <![CDATA[Stacktrace: AssertionError: expected response to have status code 200 but got 400
+   at Object.eval sandbox-script.js:1:3).]]>
+      </failure>
+    </testcase>
+    <testcase name="Successful POST request" time="0.050" classname="ApiTest">
+      <failure type="AssertionFailure" message="expected 400 to be one of [ 201, 202 ]">
+        <![CDATA[Failed 1 times.]]>
+        <![CDATA[Collection JSON ID: d158146c-b12b-4035-9fee-38c9899a0abe.]]>
+        <![CDATA[Collection name: APITest.]]>
+        <![CDATA[Request name: AddNewPharmacyError.]]>
+        <![CDATA[Test description: Successful POST request.]]>
+        <![CDATA[Error message: expected 400 to be one of [ 201, 202 ].]]>
+        <![CDATA[Stacktrace: AssertionError: expected 400 to be one of [ 201, 202 ]
+   at Object.eval sandbox-script.js:2:3).]]>
+      </failure>
+    </testcase>
   </testsuite>
 </testsuites>

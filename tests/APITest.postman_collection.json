@@ -14,8 +14,10 @@
 					"script": {
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {\r",
+							"    console.log(\"Running Status code is 200 test 1\");\r",
 							"    pm.response.to.have.status(200);\r",
-							"});"
+							"});\r",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -42,6 +44,98 @@
 							"key": "longitude",
 							"value": "10"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewPharmacyCorrect",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    console.log(\"Running Status code is 200 test 2\");\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Farmacia de prueba\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/farmacia/agregar",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"farmacia",
+						"agregar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddNewPharmacyError",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    console.log(\"Running Status code is 200 test 3\");\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"\",\r\n  \"address\": \"Direccion de prueba\",\r\n  \"latitude\": 10.5004,\r\n  \"longitude\": -8.2660\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/farmacia/agregar",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"farmacia",
+						"agregar"
 					]
 				}
 			},
