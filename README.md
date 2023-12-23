@@ -30,13 +30,14 @@ Este proyecto sigue las mejores prácticas y utiliza las siguientes herramientas
 
 2. Accede al directorio del proyecto
    
-	cd tu-proyecto
+	cd PharmacyAPI
 
 3. Ejecución de la aplicación
 
-	docker-compose up --build
+	docker-compose build
+        docker-compose up
 
-4. Acceder al a API (swagger y uso)
+5. Acceder al a API (swagger y uso)
 
     http://localhost:8080/swagger/index.html
 
